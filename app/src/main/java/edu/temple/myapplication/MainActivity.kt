@@ -55,18 +55,28 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.pauseButton).setOnClickListener {
             binder?.pause()
         }
-        
+
         findViewById<Button>(R.id.stopButton).setOnClickListener {
             binder?.stop()
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
+
+        when (item.itemId) {
+            R.id.start -> binder?.start(100)
+            R.id.pause -> binder?.pause()
+            R.id.stop -> binder?.stop()
+            else -> return false
+        }
+
+        //return super.onOptionsItemSelected(item)
+        return true
     }
 
     override fun onDestroy() {
